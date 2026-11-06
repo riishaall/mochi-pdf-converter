@@ -34,6 +34,21 @@ Open Mochi Converter at [http://localhost:8080](http://localhost:8080). The API 
 
 To stop the services, run `docker compose down`. To also remove all stored uploads and Redis state, run `docker compose down --volumes`; this permanently deletes those Docker volumes.
 
+## Install as a Windows desktop app
+
+The desktop app opens Mochi Converter in its own window and starts the same local Docker Compose services for you. It does not send files to a cloud converter. Docker Desktop must be installed and running; the app cannot convert while the computer is off.
+
+To build the Windows installer from this project, use Windows with Node.js 20+ and npm:
+
+```powershell
+npm install
+npm run desktop:dist
+```
+
+The installer is written to `release/`. Install it, start Docker Desktop, and launch Mochi Converter from the Start menu or desktop shortcut. The first launch builds any missing Docker images, which may need internet access to download base images and dependencies. Later launches can work without internet as long as those images are already available locally. Keep Docker Desktop running while converting.
+
+Closing the desktop app stops the Compose services it started. Existing services that were already running are reused and are not stopped by the app. Uploaded files remain in Docker's local `pdf_data` volume and are cleaned up by the app's one-hour retention process; uninstalling the desktop app does not remove Docker volumes. To remove those volumes and their data manually, run `docker compose -p mochi-converter down --volumes` from the project directory.
+
 ## Run without Docker
 
 ### Backend

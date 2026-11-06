@@ -1,11 +1,79 @@
 {
   "name": "mochi-converter",
   "private": true,
+  "version": "1.0.0",
+  "description": "Mochi Converter desktop launcher for the local Docker app.",
+  "main": "desktop/main.cjs",
   "workspaces": [
     "frontend"
   ],
   "scripts": {
     "dev": "npm --workspace frontend run dev",
-    "build": "npm --workspace frontend run build"
+    "build": "npm --workspace frontend run build",
+    "desktop": "electron .",
+    "desktop:dist": "npm run build && electron-builder --win nsis"
+  },
+  "devDependencies": {
+    "electron": "^35.1.5",
+    "electron-builder": "^26.0.12"
+  },
+  "build": {
+    "appId": "com.mochiconverter.desktop",
+    "productName": "Mochi Converter",
+    "directories": {
+      "app": "desktop",
+      "output": "release"
+    },
+    "files": ["**/*"],
+    "asar": false,
+    "extraFiles": [
+      {
+        "from": "desktop/package.json",
+        "to": "resources/app/package.json"
+      }
+    ],
+    "extraResources": [
+      {
+        "from": "docker-compose.yml",
+        "to": "project/docker-compose.yml"
+      },
+      {
+        "from": ".dockerignore",
+        "to": "project/.dockerignore"
+      },
+      {
+        "from": "package.json",
+        "to": "project/package.json"
+      },
+      {
+        "from": "package-lock.json",
+        "to": "project/package-lock.json"
+      },
+      {
+        "from": "backend",
+        "to": "project/backend",
+        "filter": ["**/*", "!**/__pycache__/**", "!**/.pytest_cache/**"]
+      },
+      {
+        "from": "frontend",
+        "to": "project/frontend",
+        "filter": ["**/*", "!**/node_modules/**", "!**/dist/**"]
+      },
+      {
+        "from": "photos",
+        "to": "project/photos",
+        "filter": ["**/*"]
+      }
+    ],
+    "win": {
+      "target": "nsis"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "Mochi Converter"
+    }
   }
 }

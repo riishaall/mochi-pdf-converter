@@ -1,0 +1,9 @@
+{
+  "name": "mochi-converter-desktop",
+  "version": "1.0.0",
+  "description": "Mochi Converter desktop launcher for the local Docker app.",
+  "private": true,
+  "main": "main.cjs",
+  "scripts": {},
+  "keywords": ["mochi"]
+}
