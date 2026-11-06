@@ -1,0 +1,12 @@
+{
+  "name": "Mochi Converter",
+  "short_name": "Mochi",
+  "description": "Mochi Converter turns your PDF into an editable Word file in seconds. Free, private, and cute.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#fffbf5",
+  "theme_color": "#fffbf5",
+  "icons": [
+    { "src": "/favicon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable" }
+  ]
+}

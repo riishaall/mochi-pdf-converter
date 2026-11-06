@@ -1,0 +1,9 @@
+.git
+.env
+**/node_modules
+**/dist
+**/__pycache__
+**/.pytest_cache
+**/.venv
+data
+# Keep photos/ and frontend/public/photos/ available; neither source PNGs nor optimized assets are excluded.

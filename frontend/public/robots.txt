@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://mochiconverter.com/sitemap.xml
